@@ -18,3 +18,8 @@ chrome.webRequest.onSendHeaders.addListener(function(details) {
   headers[details.tabId] = headers[details.tabId] || {};
   headers[details.tabId].request = details;
 }, filters, ["requestHeaders"]);
+
+/* remove tab data from headers object when tab is onRemoved */
+chrome.tabs.onRemoved.addListener(function(tabId, removeInfo) {
+	delete headers[tabId];
+});

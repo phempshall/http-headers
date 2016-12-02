@@ -3,8 +3,8 @@
   "author": "Paul Hempshall",
 
   "name": "HTTP Headers",
-  "version": "1.0.0",
-  "description": "This extension will show you the current HTTP headers",
+  "version": "1.0.1",
+  "description": "This extension will show you the HTTP request and response headers for the current tab.\n\nhttps://github.com/phempshall/http-headers",
 
   "background": {
     "page": "fetchHeaders.html"
