@@ -6,9 +6,17 @@ Currently available for Chrome
 
 ## Installation
 
-Not available from the store.
+Currently not available from the store.
 
 Download the latest package for your browser from the [releases](https://github.com/phempshall/http-headers/releases) page.
+
+### Chrome Installation
+
+1. Download the **chrome.crx** package from the [releases](https://github.com/phempshall/http-headers/releases) page
+2. Navigate to the downloaded file on your local computer
+3. Open Chrome > Settings > Extensions
+4. Drag and drop **chrome.crx** file from computer on to the open Chrome Extensions settings page
+5. Click accept to install the addon (displayed as a warning at the top of the browser window)
 
 
 
