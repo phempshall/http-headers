@@ -6,7 +6,10 @@ Currently available for Chrome
 
 ## Installation
 
-Currently not available from the store.
+Install directly from the Chrome webstore:
+https://chrome.google.com/webstore/detail/http-headers/fabjnpecogealbfoebkcjfbmdhnnfhbj
+
+OR
 
 Download the latest package for your browser from the [releases](https://github.com/phempshall/http-headers/releases) page.
 
