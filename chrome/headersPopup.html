@@ -2,48 +2,46 @@
 <html>
 <head>
 	<title>HTTP Headers</title>
-	<script src="headersPopup.js"></script>
 	<style>
 		body {
+    	margin: .48em 0.36em;
 			min-width: 420px;
-			max-height: 740px;
-			overflow-y: auto;
-			color: #383838;
+			min-height: 80px;
+			background-color: #fff;
+    	color: #383838;
 		}
 		p {
-			word-break: break-all;
 			margin: 0;
-			background: #fcfcfc;
-			padding: .25em .15em;
-			border: 1px solid #e8e8e8;
 			border-top: 0;
+			border: 1px solid #e8e8e8;
+			padding: .25em .15em;
+			word-break: break-all;
+			background: #fcfcfc;
 		}
 		.error-text {
+    	border-top: 1px solid #e8e8e8;
 			font-weight: 700;
 			color: #c03;
-    	border-top: 1px solid #e8e8e8;
 		}
 		h1{
-			border-bottom: 1px solid #f9f9f9;
 			margin: 0 0 .5em;
+			border-bottom: 1px solid #f9f9f9;
 		}
 		h2 {
 	    margin: 1.25em 0 0 0;
+	    border-bottom: 1px solid #e8e8e8;
 	    padding: 0 0 .75em 0;
 	    font-size: 1.4em;
 	    line-height: 1em;
-	    border-bottom: 1px solid #e8e8e8;
 		}
 	</style>
 </head>
 <body>
-
-<h1>
-	HTTP Headers
-</h1>
-
-<div id="results"></div>
-
-
+	<h1>
+		HTTP Headers
+	</h1>
+	
+	<div id="results"></div>
+	<script src="headersPopup.js"></script>
 </body>
 </html>
