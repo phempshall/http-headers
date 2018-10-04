@@ -1,3 +1,20 @@
+<!-- 
+	HTTP Headers - https://www.paulhempshall.com/io/http-headers/
+	Copyright (C) 2016-2018, Paul Hempshall. All rights reserved.
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see https://opensource.org/licenses/GPL-3.0.
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,8 +41,11 @@
 			color: #c03;
 		}
 		h1{
-			margin: 0 0 .5em;
-			border-bottom: 1px solid #f9f9f9;
+	    margin: 0 0 .5em;
+	    border-bottom: 1px solid #f9f9f9;
+	    line-height: 30px;
+	    height: 30px;
+	    font-size: 24px;
 		}
 		h2 {
 	    margin: 1.25em 0 0 0;
@@ -34,14 +54,42 @@
 	    font-size: 1.4em;
 	    line-height: 1em;
 		}
+		#results {
+			margin-bottom: 1.6em;
+		}
+		#live_headers_link {
+			float: right;
+    	height: 24px;
+    	margin: 3px 3px 0 0;
+    	cursor: pointer;
+		}
+
+		.o_theme_dark {
+			background-color: #292a33;
+    	color: #ececec;			
+		}
+		.o_theme_dark p {
+			background: #272729;
+			border-color: #000;
+		}
+		.o_theme_dark h1,
+		.o_theme_dark h2 {
+			border-color: #3e3c48;
+		}
+		.o_theme_dark #live_headers_link {
+			background-color: #333;
+			border-color: #aaa;
+			color: #efefef;
+		}
 	</style>
 </head>
 <body>
 	<h1>
-		HTTP Headers
+		HTTP Headers <button title="Open Live HTTP Headers in new tab" id="live_headers_link">Live</button>
 	</h1>
 	
 	<div id="results"></div>
+
 	<script src="headersPopup.js"></script>
 </body>
 </html>

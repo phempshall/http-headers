@@ -1,0 +1,283 @@
+<!-- 
+	HTTP Headers - https://www.paulhempshall.com/io/http-headers/
+	Copyright (C) 2016-2018, Paul Hempshall. All rights reserved.
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see https://opensource.org/licenses/GPL-3.0.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Options &bull; HTTP Headers</title>
+	<style>
+		html { height: 100%; }
+		body {
+			height: 100%;
+			min-height: 100%;
+    	margin: 0em;
+			background-color: #fff;
+    	color: #383838;
+    	position:relative;
+		}
+		.w-40 {	width: 40%; }
+		.w-60 {	width: 60%; }
+		.f-l { float: left; }
+		.p-6 { padding: 6px; box-sizing: border-box; }
+		.h-90 { height: 90%; }
+		.error-text {
+    	border-top: 1px solid #e8e8e8;
+			font-weight: 700;
+			color: #c03;
+		}
+		button {
+			cursor: pointer;
+		}
+		a {
+			color: #3961d8;
+		}
+		#header {
+	    height: 40px;
+	    width: 100%;
+	    top :0px;
+	    left: 0px;
+	    background: #CCCCCC;
+	    position: absolute;
+		}
+		#header h1 {
+			margin: 0;
+			line-height: 40px;
+			margin-left: 6px;
+			font-size: 1.16em;
+		}		
+		#footer {
+	    height: 30px;
+	    width: 100%;
+	    bottom: 0px;
+	    left: 0px;
+	    background: #CCCCCC;
+	    position: absolute;
+	    line-height: 30px;
+		}
+		#content {
+	    box-sizing: border-box;
+	    height: 100%;
+	    padding: 40px 0 30px;
+	    overflow: hidden;
+		}
+		.copyright {
+			float: left;
+			margin-left: 6px;
+		}
+
+		.donate {
+			display: block;
+			height: 20px;
+			margin-top: 5px;
+			margin-left: 6px;
+			float: left;
+			opacity: .25;
+			line-height: 20px;
+			text-decoration: none;
+	    color: #f0f0f0;
+		}
+		.donate:hover {
+			transition: opacity .25s ease-in;
+			opacity: 1;
+		}
+		.donate .donations {
+	    background-color: #555;
+	    text-shadow: 0px 0px 1px #111;
+	    padding: 1px 3px 3px 6px;
+	    border-top-left-radius: 4px;
+	    border-bottom-left-radius: 4px;
+		}
+		.donate .donate-where {
+	    text-shadow: 0px 0px 1px #111;
+	    padding: 1px 6px 3px 4px;
+	    border-top-right-radius: 4px;
+	    border-bottom-right-radius: 4px;
+		}
+		.donate-paypal { background-color: #0a0a86; }
+		.donate-bitcoin { background-color: #ab7106; }
+		.donate-litecoin { background-color: #929292; }
+		.donate-dogecoin { background-color: #bb9e00; }
+		.donate-ethereum { background-color: #0074a0; }		
+
+	
+		#about,
+		#license,
+		#options {
+			margin-bottom: 2.6em;
+		}
+
+		.option {
+			margin: 1.6em 0 1.6em 1.6em;
+		}
+		.option h3 {
+			margin: 0 0 .3em;
+		}
+		.option p {
+			margin: 0 0 6px;
+		}
+
+		input[type=radio],
+		input[type=checkbox] {
+		    margin: 0px 12px 0 6px;
+		    vertical-align: text-bottom;
+		}
+
+		#status {
+	    margin: 1.6em 0 0;
+			color: green;
+			font-weight: bold;
+		}
+
+		.o_theme_dark {
+			background-color: #292a33;
+    	color: #ececec;			
+		}
+		.o_theme_dark #header,
+		.o_theme_dark #footer {
+			background-color: #222222;
+		}		
+		.o_theme_dark #header {
+			border-bottom: 1px solid #5e5c58;
+		}
+		.o_theme_dark #footer {
+			border-top: 1px solid #5e5c58;
+		}		
+		.o_theme_dark input[type="text"] {
+			background-color: inherit;
+    	color: inherit;
+    	border: 1px solid #3e3c48;
+		}
+		.o_theme_dark select,
+		.o_theme_dark option,
+		.o_theme_dark button {
+			background-color: #292a33;
+	    color: #ececec;	
+	    border: 1px solid #999;
+	    border-radius: 2px;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+		<div class="f-l">
+			<img src="icon-32.png" alt="HTTP Headers icon" style="margin:3px 0 0 3px;">
+		</div>
+		<header class="f-l">
+			<h1>
+				HTTP Headers
+			</h1>
+		</header>
+	</div>
+	
+	<div id="content">
+		<div class="p-6">
+			<div id="options">
+				<h2>Options</h2>
+				<div class="option">
+					<h3>Theme</h3>
+					<label for="o_theme_light">Light:<input type="radio" name="o_theme" id="o_theme_light"></label>
+					<label for="o_theme_dark">Dark:<input type="radio" name="o_theme" id="o_theme_dark"></label>
+				</div>
+				<div class="option">
+					<h3>Default Output on Live Headers View</h3>
+					<label for="o_live_output_formatted">Formatted:<input type="radio" name="o_live_output" id="o_live_output_formatted"></label>
+					<label for="o_live_output_raw">Raw:<input type="radio" name="o_live_output" id="o_live_output_raw"></label>
+				</div>		
+				<div class="option">
+					<h3>Fetch Direction on Live Headers View</h3>
+					<label for="o_live_direction_out">Request:<input type="checkbox" name="o_live_direction" id="o_live_direction_out"></label>	
+					<label for="o_live_direction_in">Response:<input type="checkbox" name="o_live_direction" id="o_live_direction_in"></label>				
+				</div>
+				<div class="option">
+					<h3>Fetch Type on Live Headers View</h3>
+					<label for="o_live_type_main_frame">[main_frame]:<input type="checkbox" name="o_live_type" id="o_live_type_main_frame"></label>
+					<label for="o_live_type_sub_frame">[sub_frame]:<input type="checkbox" name="o_live_type" id="o_live_type_sub_frame"></label>
+					<label for="o_live_type_stylesheet">[stylesheet]:<input type="checkbox" name="o_live_type" id="o_live_type_stylesheet"></label>
+					<label for="o_live_type_script">[script]:<input type="checkbox" name="o_live_type" id="o_live_type_script"></label>
+					<label for="o_live_type_image">[image]:<input type="checkbox" name="o_live_type" id="o_live_type_image"></label>
+					<label for="o_live_type_object">[object]:<input type="checkbox" name="o_live_type" id="o_live_type_object"></label>
+					<label for="o_live_type_xmlhttprequest">[xmlhttprequest]:<input type="checkbox" name="o_live_type" id="o_live_type_xmlhttprequest"></label>
+					<label for="o_live_type_other">[other]:<input type="checkbox" name="o_live_type" id="o_live_type_other"></label>	
+				</div>
+				<div class="option">
+					<h3>Donation Bar on Live Headers View</h3>
+					<label for="o_live_donation_show">Show:<input type="radio" name="o_live_donation" id="o_live_donation_show"></label>
+					<label for="o_live_donation_hide">Hide:<input type="radio" name="o_live_donation" id="o_live_donation_hide"></label>
+				</div>
+				<div class="option">
+					<button id="save">Apply &amp; Save Options</button>
+					<button id="defaults">Restore Defaults</button>
+					<div id="status">&nbsp;</div>
+				</div>
+			</div>	
+
+			<div id="about">
+				<h2>About HTTP Headers</h2>
+				<p>
+					HTTP Headers was written when the original HTTP Headers (HTTP Headers Live) extension sold out to malware injection and adverts. I decided it was time to write my own clean, ad-free, safe version that I didn't have to worry about. This is the outcome, slighly different to the original, a way for me to learn as I developed this version.
+				</p>
+				<p>
+					Contact me for bug reports/suggestions;
+				</p>
+				<ul>
+					<li><strong>Web: </strong><a href="https://www.paulhempshall.com">https://www.paulhempshall.com</a></li>
+					<li><strong>Email: </strong><a href="mailto:chrome-dev@paulhempshall.com">chrome-dev@paulhempshall.com</a></li>
+					<li><strong>Twitter: </strong><a href="https://twitter.com/paul_hempshall">https://twitter.com/paul_hempshall</a></li>
+					<li><strong>GitHub: </strong><a href="https://github.com/phempshall/http-headers">https://github.com/phempshall/http-headers</a></li>
+					<li><strong>Chrome Store: </strong><a href="https://chrome.google.com/webstore/detail/http-headers/fabjnpecogealbfoebkcjfbmdhnnfhbj">https://chrome.google.com/webstore/detail/http-headers/fabjnpecogealbfoebkcjfbmdhnnfhbj</a></li>
+				</ul>
+			</div>
+
+			<div id="license">
+				<h2>License</h2>
+				<pre>
+	HTTP Headers - https://www.paulhempshall.com/io/http-headers/
+	Copyright (C) 2016-2018, Paul Hempshall. All rights reserved.
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see https://opensource.org/licenses/GPL-3.0.
+				</pre>
+			</div>
+		</div><!-- .p-6 -->
+	</div><!-- #content -->
+
+	<div id="footer">
+		<div class="copyright">
+			&copy; Copyright <a href="https://www.paulhempshall.com/io/http-headers/">https://www.paulhempshall.com/io/http-headers/</a>. 
+		</div>
+		<div id="donations">				
+			<a href="https://paypal.me/paulhempshall" class="donate" title="Donate with PayPal"><span class="donations">donations</span><span class="donate-where donate-paypal">PayPal</span></a>
+			<a href="https://blockchain.info/address/1K1AhrU5JS8euypB3Vw2iGxXqsbwcf9kxN" class="donate" title="Donate with Bitcoin/BCash"><span class="donations">donations</span><span class="donate-where donate-bitcoin">Bitcoin</span></a>
+			<a href="https://chainz.cryptoid.info/ltc/address.dws?LLowTnsW4d3uymbZiiFZLUkejZCcdcmW6F" class="donate" title="Donate with Litecoin"><span class="donations">donations</span><span class="donate-where donate-litecoin">Litecoin</span></a>
+			<a href="https://dogechain.info/address/DGB5acV5rfEZaovAM1PNHmbbecrrwb1jsG" class="donate" title="Donate with Dogecoin"><span class="donations">donations</span><span class="donate-where donate-dogecoin">Dogecoin</span></a>
+			<a href="https://etherscan.io/address/0xe8b4f8842bf14b9a4ce675461153ea21ca742bc7" class="donate" title="Donate with Ethereum/EthClassic"><span class="donations">donations</span><span class="donate-where donate-ethereum">Ethereum</span></a>				
+		</div>
+	</div>
+
+	<script src="headersOptions.js"></script>
+</body>
+</html>
