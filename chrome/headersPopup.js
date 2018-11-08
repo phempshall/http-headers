@@ -1,8 +1,28 @@
+/** 
+ *  HTTP Headers - https://www.paulhempshall.com/io/http-headers/
+ *  Copyright (C) 2016-2018, Paul Hempshall. All rights reserved.
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see https://opensource.org/licenses/GPL-3.0.
+ */
+
 'use strict';
 
 chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
   var results = document.getElementById('results'),
       headers = chrome.extension.getBackgroundPage().headers[tab[0].id];
+
+  document.body.classList.add(chrome.extension.getBackgroundPage().currentSettings.o_theme);
 
   if (headers === undefined) {
     printError();
@@ -11,6 +31,11 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
     printResults();
   }
 
+  function sanitize (data) {
+    data = data.replace(/</g, "&lt;");
+    data = data.replace(/>/g, "&gt;");
+    return data;
+  }
 
   function clearResults () {
     results.innerHTML = '';
@@ -54,15 +79,15 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
 
     function printStatus (obj) {
       if (obj.statusLine) {
-        results.innerHTML += "<p><b>" + obj.statusLine + "</b></p>";
+        results.innerHTML += "<p><b>" + sanitize(obj.statusLine) + "</b></p>";
       }
       else {
-        results.innerHTML += "<p><b>" + obj.method + " " + obj.url + "</b></p>";
+        results.innerHTML += "<p><b>" + sanitize(obj.method) + " " + sanitize(obj.url) + "</b></p>";
       }
     }
 
     function printHeader (obj) {
-      results.innerHTML += "<p><b>" + obj.name + ":</b> " + obj.value + "</p>";
+      results.innerHTML += "<p><b>" + sanitize(obj.name) + ":</b> " + sanitize(obj.value) + "</p>";
     }
 
     function printKeys (key) {
@@ -75,3 +100,16 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
     }
   }
 });
+
+
+document.getElementById('live_headers_link').addEventListener('click', launchLiveHeaders, false);
+
+function launchLiveHeaders (e) {
+  e.preventDefault();
+  
+  chrome.tabs.create(
+    {
+      url: chrome.extension.getURL("headersLive.html")
+    }
+  );
+}

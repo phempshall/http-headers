@@ -1,0 +1,476 @@
+<!-- 
+	HTTP Headers - https://github.com/phempshall/http-headers
+	Copyright (C) 2016-2018, Paul Hempshall. All rights reserved.
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see https://opensource.org/licenses/GPL-3.0.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTTP Headers</title>
+	<style>
+		html { height: 100%; }
+		body {
+			height: 100%;
+			min-height: 100%;
+    	margin: 0em;
+			background-color: #fff;
+    	color: #383838;
+    	position:relative;
+		}
+		.w-40 {	width: 40%; }
+		.w-60 {	width: 60%; }
+		.f-l { float: left; }
+		.p-6 { padding: 6px; box-sizing: border-box; }
+		.h-90 { height: 90%; }
+		.error-text {
+    	border-top: 1px solid #e8e8e8;
+			font-weight: 700;
+			color: #c03;
+		}
+		a {
+			color: #3961d8;
+		}
+		button {
+			cursor: pointer;
+		}
+		#header {
+	    height: 40px;
+	    width: 100%;
+	    top :0px;
+	    left: 0px;
+	    background: #CCCCCC;
+	    position: absolute;
+		}
+		#footer {
+	    height: 30px;
+	    width: 100%;
+	    bottom: 0px;
+	    left: 0px;
+	    background: #CCCCCC;
+	    position: absolute;
+	    line-height: 30px;
+		}
+		#content {
+	    box-sizing: border-box;
+	    height: 100%;
+	    padding: 40px 0 30px;
+	    overflow: hidden;
+		}
+		.copyright {
+			float: left;
+			margin-left: 6px;
+		}
+		.donate {
+			display: block;
+			height: 20px;
+			margin-top: 5px;
+			margin-left: 6px;
+			float: left;
+			opacity: .25;
+			line-height: 20px;
+			text-decoration: none;
+	    color: #f0f0f0;
+		}
+		.donate:hover {
+			transition: opacity .25s ease-in;
+			opacity: 1;
+		}
+		.donate .donations {
+	    background-color: #555;
+	    text-shadow: 0px 0px 1px #111;
+	    padding: 1px 3px 3px 6px;
+	    border-top-left-radius: 4px;
+	    border-bottom-left-radius: 4px;
+		}
+		.donate .donate-where {
+	    text-shadow: 0px 0px 1px #111;
+	    padding: 1px 6px 3px 4px;
+	    border-top-right-radius: 4px;
+	    border-bottom-right-radius: 4px;
+		}
+		.donate-paypal { background-color: #0a0a86; }
+		.donate-bitcoin { background-color: #ab7106; }
+		.donate-litecoin { background-color: #929292; }
+		.donate-dogecoin { background-color: #bb9e00; }
+		.donate-ethereum { background-color: #0074a0; }		
+
+		button {
+			height: 22px;
+		}
+				
+		#toolbar {
+			height: 40px;
+			width: 100%;
+			background-color: #d0d0d0;
+			box-sizing: border-box;
+			border-bottom: 1px solid #ccc;
+		}
+		#toolbar h1 {
+			margin: 0;
+			line-height: 40px;
+			margin-left: 6px;
+			font-size: 1.16em;
+		}
+		.toggle {
+			margin-left: 1.6em;
+			margin-top: 6px;
+		}
+		#toggleButton {
+			width: 36px;
+			height: 28px;
+			cursor: pointer;
+		}
+		.reset {
+			margin: 9px 0 0 1.6em;
+		}
+
+		.filter {
+		    margin-left: 1.6em;
+		    margin-top: 9px;
+		    line-height: 22px;
+		}
+		.filter select {
+			width: 100px;
+			height: 22px;
+		}
+
+		.options {
+			float: right;
+			margin: 9px 6px 0 0;
+		}
+	
+		#results {
+			overflow: hidden;
+			height: 100%;
+    	/*margin-top: -40px;*/
+    	display: flex;
+		}
+		#results > div {
+			box-sizing: border-box;
+    	/*margin-top: 80px;*/
+    	overflow: auto;
+			height: 100%;
+			flex-grow: 1;
+		}
+		#stream {
+			border-right: 1px solid #ddd;
+			height: inherit;
+			resize: horizontal;
+		}
+		#stream table {
+			table-layout: fixed;
+			width: 100%;
+			border-collapse: collapse;
+			border: none;
+		}
+		#stream table thead {
+			border-bottom: 1px solid #ddd;
+		}
+		#stream table th {
+			height: 30px;
+			background: #f0f0f0;
+		}
+		#stream table th,
+		#stream table td {
+			border-right: 1px solid #ddd;
+		}
+		#stream table th:last-child,
+		#stream table td:last-child  {
+			border-right: none;
+		}
+		#stream table td {
+			text-align: center;
+			padding: 3px;
+		}
+		#stream table tbody tr {
+			border-bottom: 1px solid #ddd;
+		}
+		#stream table tbody tr:hover {
+			background: #fafafa;
+		}
+		#stream input[type=text] {
+			box-sizing: border-box;
+			width: 100%;
+		}
+		.stream-active {
+			background: #dadada !important;
+		}
+		.sticky {
+			position: sticky;
+    	top: 0;
+    	z-index: 24;
+		}
+		.status { color: #fff; }
+		.status-100 { background-color: #fff; }
+		.status-200 { background-color: #75bb76; }
+		.status-300{ background-color: #75a4bb; }
+		.status-400 { background-color: #bb7575; }
+		.status-500 { background-color: #bba975; }
+
+		#dataHeader {
+			height: 32px;
+			line-height: 32px;
+			font-weight: bold;
+    	background: #f0f0f0;
+    	border-bottom: 1px solid #ddd;
+    	padding-left: 6px;
+		}
+		#dataArea {
+	    box-sizing: border-box;
+	    width: 100%;
+	    min-width: 100%;
+	    max-width: 100%;
+      height: 420px;
+      max-height: 100%;
+	    overflow: auto;
+	    outline: 0;
+		}
+		.tabber-style {
+			border-bottom: 0;
+			outline: 0;
+			cursor: pointer;
+		}
+		.tabber-style-active {
+			background: #ccc;
+			border-color: #aaa;
+			font-weight: bold;
+			border-top-right-radius: 2px;
+			border-top-left-radius: 2px;
+		}
+
+
+		input[type=radio],
+		input[type=checkbox] {
+		    margin: 0px 12px 0 6px;
+		    vertical-align: text-bottom;
+		}
+		label {
+			user-select: none;
+		}
+
+		.filters h4 {
+			margin: 18px 0 6px;
+		}
+
+
+
+		.o_theme_dark {
+			background-color: #292a33;
+    	color: #ececec;			
+		}
+		.o_theme_dark #toolbar,
+		.o_theme_dark #footer {
+			background-color: #222222;
+		}		
+		.o_theme_dark #toolbar {
+			border-bottom: 1px solid #5e5c58;
+		}
+		.o_theme_dark #footer {
+			border-top: 1px solid #5e5c58;
+		}		
+
+			
+		.o_theme_dark #stream {
+			border-right: 1px solid #3e3c48;
+		}
+		.o_theme_dark #stream table thead {
+			border-bottom: 1px solid #3e3c48;
+		}
+		.o_theme_dark #stream table th {
+			background: #272729;
+		}
+		.o_theme_dark #stream table th,
+		.o_theme_dark #stream table td {
+			border-right: 1px solid #3e3c48;
+		}
+		.o_theme_dark #stream table th:last-child,
+		.o_theme_dark #stream table td:last-child  {
+			border-right: none;
+		}
+		.o_theme_dark #stream table tbody tr {
+			border-bottom: 1px solid #3e3c48;
+		}
+		.o_theme_dark #stream table tbody tr:hover {
+			background: #1e1c18;
+		}
+		.o_theme_dark .stream-active {
+			background: #111 !important;
+		}
+		.o_theme_dark #dataHeader {
+			background: #272729;
+			border-bottom: 1px solid #3e3c48;
+		}
+		.o_theme_dark #dataArea,
+		.o_theme_dark input[type="text"] {
+			background-color: inherit;
+    	color: inherit;
+    	border: 1px solid #3e3c48;
+		}
+		.o_theme_dark select,
+		.o_theme_dark option,
+		.o_theme_dark button {
+			background-color: #292a33;
+	    color: #ececec;	
+	    border: 1px solid #999;
+	    border-radius: 2px;
+		}
+
+		.o_theme_dark #o_live_output_formatted,
+		.o_theme_dark #o_live_output_raw {
+			border-bottom: none;
+		}
+		.o_theme_dark .tabber-style-active {
+			background: #272729;
+			border-color: #6f6f6f;
+		}
+		
+		
+	</style>
+	<style id="filterByTabs_styleElement"></style>
+	<style id="filterByDirection_styleElement"></style>
+	<style id="filterByType_styleElement"></style>
+	<style id="filterByMethod_styleElement"></style>
+	<style id="filterByStatus_styleElement"></style>
+</head>
+<body>
+
+	<!-- <div id="full-height"> -->
+		<div id="header">
+			<div id="toolbar">
+				<div class="f-l">
+					<img src="icon-32.png" alt="HTTP Headers icon" style="margin:3px 0 0 3px;">
+				</div>
+				<header class="f-l">
+					<h1>
+						HTTP Headers
+					</h1>
+				</header>
+				<section class="toggle f-l">
+					<!-- <button id="toggleButton">&#x25BA;</button> -->
+					<button id="toggleButton">&#9646;&#9646;</button>
+				</section>
+				<section class="reset f-l">
+					<button id="resetButton">Reset</button>
+				</section>
+				<section class="filter f-l">
+					<span>Filter by tab(s): </span>
+					<select name="filterByTabs" id="filterByTabs">
+						<option value="0"></option>
+					</select>			
+				</section>
+				<section class="options f-l">
+					<button id="goToOptionsButton">Options</button>
+				</section>
+			</div>			
+		</div>
+		
+		<div id="content">
+			<div id="results">
+				<div id="stream" class="w-40 f-l">
+					<table id="streamData">
+						<thead>
+							<tr>
+								<th title="Number" style="width:30px;" class="sticky">#</th>
+								<th title="Direction" style="width:30px;" class="sticky">&#x21C5;</th>
+								<th title="Time" style="width:100px;" class="sticky">Time</th>
+								<th title="Method" style="width:58px;" class="sticky">Method</th>
+								<th title="Status" style="width:50px;" class="sticky">Status</th>
+								<th title="URL" class="sticky">URL</th>					
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div><!-- #stream -->
+
+				<div id="data" class="w-60 f-l">
+					<div id="dataHeader">
+						Request/Response
+					</div>
+					<div class="p-6"> <!-- tabber-style-active -->
+						<button class="tabber-style" id="o_live_output_formatted">Formatted</button> <button class="tabber-style" id="o_live_output_raw">Raw</button>
+						<textarea name="dataArea" id="dataArea" readonly="readonly"></textarea>
+					</div>
+					<div class="p-6">
+						<h3>Additional Filters</h3>
+
+						<div class="filters">
+							<h4>Filter by direction:</h4>
+							<label for="filterByDirection_REQ">Request:<input type="checkbox" name="filterByDirection" id="filterByDirection_REQ" value="REQ"></label>
+							<label for="filterByDirection_RESP">Response:<input type="checkbox" name="filterByDirection" id="filterByDirection_RESP" value="RESP"></label>							
+						</div>
+
+						<div class="filters">
+							<h4>Filter by type:</h4>
+							<label for="filterByType_main_frame">[main_frame]:<input type="checkbox" name="filterByType" id="filterByType_main_frame" value="main_frame"></label>
+							<label for="filterByType_sub_frame">[sub_frame]:<input type="checkbox" name="filterByType" id="filterByType_sub_frame" value="sub_frame"></label>
+							<label for="filterByType_stylesheet">[stylesheet]:<input type="checkbox" name="filterByType" id="filterByType_stylesheet" value="stylesheet"></label>
+							<label for="filterByType_script">[script]:<input type="checkbox" name="filterByType" id="filterByType_script" value="script"></label>
+							<label for="filterByType_image">[image]:<input type="checkbox" name="filterByType" id="filterByType_image" value="image"></label>
+							<label for="filterByType_object">[object]:<input type="checkbox" name="filterByType" id="filterByType_object" value="object"></label>
+							<label for="filterByType_xmlhttprequest">[xmlhttprequest]:<input type="checkbox" name="filterByType" id="filterByType_xmlhttprequest" value="xmlhttprequest"></label>
+							<label for="filterByType_other">[other]:<input type="checkbox" name="filterByType" id="filterByType_other" value="other"></label>
+						</div>
+
+						<div class="filters">
+							<h4>Filter by method:</h4>
+							<label for="filterByMethod_GET">GET:<input type="checkbox" name="filterByMethod" id="filterByMethod_GET" value="GET"></label>
+							<label for="filterByMethod_HEAD">HEAD:<input type="checkbox" name="filterByMethod" id="filterByMethod_HEAD" value="HEAD"></label>
+							<label for="filterByMethod_POST">POST:<input type="checkbox" name="filterByMethod" id="filterByMethod_POST" value="POST"></label>
+							<label for="filterByMethod_PUT">PUT:<input type="checkbox" name="filterByMethod" id="filterByMethod_PUT" value="PUT"></label>
+							<label for="filterByMethod_DELETE">DELETE:<input type="checkbox" name="filterByMethod" id="filterByMethod_DELETE" value="DELETE"></label>
+							<label for="filterByMethod_TRACE">TRACE:<input type="checkbox" name="filterByMethod" id="filterByMethod_TRACE" value="TRACE"></label>
+							<label for="filterByMethod_OPTIONS">OPTIONS:<input type="checkbox" name="filterByMethod" id="filterByMethod_OPTIONS" value="OPTIONS"></label>
+							<label for="filterByMethod_CONNECT">CONNECT:<input type="checkbox" name="filterByMethod" id="filterByMethod_CONNECT" value="CONNECT"></label>
+							<label for="filterByMethod_PATCH">PATCH:<input type="checkbox" name="filterByMethod" id="filterByMethod_PATCH" value="PATCH"></label>
+						</div>
+						
+						<div class="filters">
+							<h4>Filter by status:</h4>
+							<select name="filterByStatus" id="filterByStatus">
+								<option value="0"></option>
+							</select>
+						</div>
+
+						<div class="filters">
+							<p>
+								<button id="clearFiltersButton">Clear Filters</button>
+							</p>
+						</div>
+					</div>
+				</div><!-- #data -->
+			</div><!-- #results -->
+		</div><!-- #content -->
+
+		<div id="footer">
+			<div class="copyright">
+				&copy; Copyright <a href="https://www.paulhempshall.com/io/http-headers/">https://www.paulhempshall.com/io/http-headers</a>. 
+			</div>
+
+			<div id="donations">				
+				<a href="https://paypal.me/paulhempshall" class="donate" title="Donate with PayPal"><span class="donations">donations</span><span class="donate-where donate-paypal">PayPal</span></a>
+				<a href="https://blockchain.info/address/1K1AhrU5JS8euypB3Vw2iGxXqsbwcf9kxN" class="donate" title="Donate with Bitcoin/BCash"><span class="donations">donations</span><span class="donate-where donate-bitcoin">Bitcoin</span></a>
+				<a href="https://chainz.cryptoid.info/ltc/address.dws?LLowTnsW4d3uymbZiiFZLUkejZCcdcmW6F" class="donate" title="Donate with Litecoin"><span class="donations">donations</span><span class="donate-where donate-litecoin">Litecoin</span></a>
+				<a href="https://dogechain.info/address/DGB5acV5rfEZaovAM1PNHmbbecrrwb1jsG" class="donate" title="Donate with Dogecoin"><span class="donations">donations</span><span class="donate-where donate-dogecoin">Dogecoin</span></a>
+				<a href="https://etherscan.io/address/0xe8b4f8842bf14b9a4ce675461153ea21ca742bc7" class="donate" title="Donate with Ethereum/EthClassic"><span class="donations">donations</span><span class="donate-where donate-ethereum">Ethereum</span></a>				
+			</div>
+		</div>
+	<!-- </div>end full-height -->
+
+	<script src="headersHelpers.js"></script>
+	<script src="headersLive.js"></script>
+</body>
+</html>
