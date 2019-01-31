@@ -1,6 +1,6 @@
 /** 
  *	HTTP Headers - https://www.paulhempshall.com/io/http-headers/
- *	Copyright (C) 2016-2018, Paul Hempshall. All rights reserved.
+ *	Copyright (C) 2016-2019, Paul Hempshall. All rights reserved.
  *
  *	This program is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by

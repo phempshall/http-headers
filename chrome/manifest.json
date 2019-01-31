@@ -3,7 +3,7 @@
   "author": "Paul Hempshall",
 
   "name": "HTTP Headers",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Displays the current tab’s HTTP request and response or a Live HTTP Headers tab showing a stream of requests and responses.",
 
   "background": {
