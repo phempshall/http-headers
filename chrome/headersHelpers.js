@@ -11,7 +11,6 @@
 
 'use strict';
 
-
 const httpStatusCodes = {
 	//1×× Informational
 	'100' : 'Continue',
